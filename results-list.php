@@ -39,12 +39,13 @@
 								$row['kilometrage'], $row['annee'], $row['prix_achat'],
 								$row['tarif_idTarif'], $row['reservations_libre'], $row['marques_idMarque'],
 								$row['concessionnaires_idConcessionnaire'], $row['agence_idAgence'], $row['nom'], 
-								$row['energie'], $row['energie'], $row['consumption']
+								$row['energie'], $row['consumption'], $row['categorie']
+                                
 							);
 		}
 	}
 
-	require_once('includes/header.html');
+	require_once('includes/header.php');
 ?>
     <!-- Start Body Content -->
   	<div class="main" role="main">
