@@ -44,7 +44,7 @@
 		}
 	}
 
-	require_once('includes/header.html');
+	require_once('includes/header.php');
 ?>
     <!-- Start Body Content -->
   	<div class="main" role="main">
