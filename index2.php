@@ -1,7 +1,7 @@
 <?php 
 	$host = "localhost"; //var host = "localhost";
 	$user = "root";
-	$password = "";
+	$password = "root";
 	$database = "bob_bob";//nom de la base de données
 	
 	$conn = mysqli_connect($host, $user, $password, $database);
@@ -9,7 +9,7 @@
 	if(!$conn)//lorsqu'il n'y a qu'une seule ligne, les accolades ne sont pas obligatoires
 	die("Error 502 - " .mysqli_connect_error());//die("Error 502 - " + mysqli_connect_error());
 
-require_once('includes/header.html');
+require_once('includes/header2.php');
 ?>
     <!-- Start Body Content -->
   	<div class="main" role="main">

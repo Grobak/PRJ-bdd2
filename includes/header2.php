@@ -52,20 +52,20 @@
                             <span class="user-dd-dropper"><i class="fa fa-angle-down"></i></span>
                         </a>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="userdropdown">
-                            <li><a href="user-dashboard.html">Dashboard</a></li>
-                            <li><a href="user-dashboard-saved-searches.html">Saved Searches</a></li>
-                            <li><a href="user-dashboard-saved-cars.html">Saved Cars</a></li>
-                            <li><a href="user-dashboard-manage-ads.html">Manage Ads</a></li>
-                            <li><a href="user-dashboard-profile.html">My Profile</a></li>
-                            <li><a href="user-dashboard-settings.html">Settings</a></li>
+                            <li><a href="user-dashboard.php">Dashboard</a></li>
+                            <li><a href="user-dashboard-saved-searches.php">Saved Searches</a></li>
+                            <li><a href="user-dashboard-saved-cars.php">Saved Cars</a></li>
+                            <li><a href="user-dashboard-manage-ads.php">Manage Ads</a></li>
+                            <li><a href="user-dashboard-profile.php">My Profile</a></li>
+                            <li><a href="user-dashboard-settings.php">Settings</a></li>
                             <li><a href="#">Log Out</a></li>
                         </ul>
                     </div>
                     <div class="topnav dd-menu">
                         <ul class="top-navigation sf-menu">
-                            <li><a href="results-list.html">Buy</a></li>
-                            <li><a href="add-listing-pricing.html">Sell</a></li>
-                            <li><a href="joinus.html">Join</a></li>
+                            <li><a href="results-list.php">Buy</a></li>
+                            <li><a href="add-listing-pricing.php">Sell</a></li>
+                            <li><a href="joinus.php">Join</a></li>
                         </ul>
                     </div>
                 </div>
@@ -94,79 +94,79 @@
                                 <li><a href="javascript:void(0)">Slider versions</a>
                             		<ul class="dropdown">
                                 		<li><a href="index2.php">Default(Flexslider)</a></li>
-                                		<li><a href="index-revslider.html">Slider Revolution <span class="label label-danger">New</span></a></li>
-                                        <li><a href="hero-carousel.html">Full Width Carousel</a></li>
+                                		<li><a href="index-revslider.php">Slider Revolution <span class="label label-danger">New</span></a></li>
+                                        <li><a href="hero-carousel.php">Full Width Carousel</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="javascript:void(0)">Search Form Positions</a>
                             		<ul class="dropdown">
                                 		<li><a href="index2.php">Default(With Main Menu)</a></li>
-                                        <li><a href="search-below-slider.html">Below Slider</a></li>
-                                        <li><a href="search-over-slider.html">Over Slider</a></li>
+                                        <li><a href="search-below-slider.php">Below Slider</a></li>
+                                        <li><a href="search-over-slider.php">Over Slider</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="javascript:void(0)">Header versions</a>
                             		<ul class="dropdown">
                                 		<li><a href="index2.php">Default</a>
-                                        <li><a href="header-v2.html">Version 2</a></li>
-                                        <li><a href="header-v3.html">Version 3</a></li>
-                                        <li><a href="header-v4.html">Version 4</a></li>
+                                        <li><a href="header-v2.php">Version 2</a></li>
+                                        <li><a href="header-v3.php">Version 3</a></li>
+                                        <li><a href="header-v4.php">Version 4</a></li>
                                     </ul>
                                 </li>
                             </ul>
                         </li>
                         <li><a href="javascript:void(0)">Pages</a>
                             <ul class="dropdown">
-                                <li><a href="about.html">About Us</a></li>
-                                <li><a href="contact.html">Contact Us</a></li>
-                                <li><a href="joinus.html">Signup</a></li>
-                                <li><a href="404.html">404 Error Page</a></li>
-                                <li><a href="add-listing-pricing.html">Pricing</a></li>
-                                <li><a href="shortcodes.html">Shortcodes</a></li>
-                                <li><a href="typography.html">Typography</a></li>
-                                <li><a href="dealers-search.html">Dealer Search</a></li>
-                                <li><a href="dealers-search-results.html">Dealer Search Results</a></li>
+                                <li><a href="about.php">About Us</a></li>
+                                <li><a href="contact.php">Contact Us</a></li>
+                                <li><a href="joinus.php">Signup</a></li>
+                                <li><a href="404.php">404 Error Page</a></li>
+                                <li><a href="add-listing-pricing.php">Pricing</a></li>
+                                <li><a href="shortcodes.php">Shortcodes</a></li>
+                                <li><a href="typography.php">Typography</a></li>
+                                <li><a href="dealers-search.php">Dealer Search</a></li>
+                                <li><a href="dealers-search-results.php">Dealer Search Results</a></li>
                             </ul>
                         </li>
-                        <li class="megamenu"><a href="index2.html">Mega Menu</a>
+                        <li class="megamenu"><a href="index2.php">Mega Menu</a>
                             <ul class="dropdown">
                                 <li>
                                     <div class="megamenu-container container">
                                         <div class="row">
                                             <div class="mm-col col-md-2">
                                                 <ul class="sub-menu">
-                                                    <li><a href="results-list.html">Brand new cars</a></li>
-                                                    <li><a href="results-list.html">Used cars</a></li>
-                                                    <li><a href="results-list.html">Latest reviews</a></li>
-                                                    <li><a href="blog.html">Auto news</a></li>
-                                                    <li><a href="about.html">Car insurance</a></li>
+                                                    <li><a href="results-list.php">Brand new cars</a></li>
+                                                    <li><a href="results-list.php">Used cars</a></li>
+                                                    <li><a href="results-list.php">Latest reviews</a></li>
+                                                    <li><a href="blog.php">Auto news</a></li>
+                                                    <li><a href="about.php">Car insurance</a></li>
                                                 </ul>
                                             </div>
                                             <div class="mm-col col-md-5">
                                                 <span class="megamenu-sub-title">Browse by body type</span>
                                                 <ul class="body-type-widget">
-                                                    <li> <a href="results-list.html"><img src="images/body-types/wagon.png" alt=""> <span>Wagon</span></a></li>
-                                                    <li> <a href="results-list.html"><img src="images/body-types/minivan.png" alt=""> <span>Minivan</span></a></li>
-                                                    <li> <a href="results-list.html"><img src="images/body-types/coupe.png" alt=""> <span>Coupe</span></a></li>
-                                                    <li> <a href="results-list.html"><img src="images/body-types/convertible.png" alt=""> <span>Convertible</span></a></li>
-                                                    <li> <a href="results-list.html"><img src="images/body-types/crossover.png" alt=""> <span>Crossover</span></a></li>
-                                                    <li> <a href="results-list.html"><img src="images/body-types/suv.png" alt=""> <span>SUV</span></a></li>
+                                                    <li> <a href="results-list.php"><img src="images/body-types/wagon.png" alt=""> <span>Wagon</span></a></li>
+                                                    <li> <a href="results-list.php"><img src="images/body-types/minivan.png" alt=""> <span>Minivan</span></a></li>
+                                                    <li> <a href="results-list.php"><img src="images/body-types/coupe.png" alt=""> <span>Coupe</span></a></li>
+                                                    <li> <a href="results-list.php"><img src="images/body-types/convertible.png" alt=""> <span>Convertible</span></a></li>
+                                                    <li> <a href="results-list.php"><img src="images/body-types/crossover.png" alt=""> <span>Crossover</span></a></li>
+                                                    <li> <a href="results-list.php"><img src="images/body-types/suv.png" alt=""> <span>SUV</span></a></li>
                                                 </ul>
-                                                <a href="results-list.html" class="basic-link">view all</a>
+                                                <a href="results-list.php" class="basic-link">view all</a>
                                             </div>
                                             <div class="mm-col col-md-5">
                                                 <span class="megamenu-sub-title">Browse by make</span>
                                                 <ul class="make-widget">
-                                                    <li class="item"> <a href="results-list.html"><img src="http://placehold.it/100x100&amp;text=IMAGE+PLACEHOLDER" alt=""></a></li>
-                                    				<li class="item"> <a href="results-list.html"><img src="http://placehold.it/100x100&amp;text=IMAGE+PLACEHOLDER" alt=""></a></li>
-                                    				<li class="item"> <a href="results-list.html"><img src="http://placehold.it/100x100&amp;text=IMAGE+PLACEHOLDER" alt=""></a></li>
-                                                    <li class="item"> <a href="results-list.html"><img src="http://placehold.it/100x100&amp;text=IMAGE+PLACEHOLDER" alt=""></a></li>
-                                                    <li class="item"> <a href="results-list.html"><img src="http://placehold.it/100x100&amp;text=IMAGE+PLACEHOLDER" alt=""></a></li>
-                                                    <li class="item"> <a href="results-list.html"><img src="http://placehold.it/100x100&amp;text=IMAGE+PLACEHOLDER" alt=""></a></li>
-                                                    <li class="item"> <a href="results-list.html"><img src="http://placehold.it/100x100&amp;text=IMAGE+PLACEHOLDER" alt=""></a></li>
-                                    				<li class="item"> <a href="results-list.html"><img src="http://placehold.it/100x100&amp;text=IMAGE+PLACEHOLDER" alt=""></a></li>
+                                                    <li class="item"> <a href="results-list.php"><img src="http://placehold.it/100x100&amp;text=IMAGE+PLACEHOLDER" alt=""></a></li>
+                                    				<li class="item"> <a href="results-list.php"><img src="http://placehold.it/100x100&amp;text=IMAGE+PLACEHOLDER" alt=""></a></li>
+                                    				<li class="item"> <a href="results-list.php"><img src="http://placehold.it/100x100&amp;text=IMAGE+PLACEHOLDER" alt=""></a></li>
+                                                    <li class="item"> <a href="results-list.php"><img src="http://placehold.it/100x100&amp;text=IMAGE+PLACEHOLDER" alt=""></a></li>
+                                                    <li class="item"> <a href="results-list.php"><img src="http://placehold.it/100x100&amp;text=IMAGE+PLACEHOLDER" alt=""></a></li>
+                                                    <li class="item"> <a href="results-list.php"><img src="http://placehold.it/100x100&amp;text=IMAGE+PLACEHOLDER" alt=""></a></li>
+                                                    <li class="item"> <a href="results-list.php"><img src="http://placehold.it/100x100&amp;text=IMAGE+PLACEHOLDER" alt=""></a></li>
+                                    				<li class="item"> <a href="results-list.php"><img src="http://placehold.it/100x100&amp;text=IMAGE+PLACEHOLDER" alt=""></a></li>
                                                 </ul>
-                                                <a href="results-list.html" class="basic-link">view all</a>
+                                                <a href="results-list.php" class="basic-link">view all</a>
                                             </div>
                                         </div>
                                     </div>
@@ -175,40 +175,40 @@
                         </li>
                         <li><a href="javascript:void(0)">Listing</a>
                             <ul class="dropdown">
-                                <li><a href="results-list.html">List View</a></li>
-                                <li><a href="results-grid.html">Grid View</a></li>
-                                <li><a href="vehicle-details.html">Vehicle Details</a></li>
-                                <li><a href="add-listing-form.html">Add new listing</a></li>
-                                <li><a href="vehicle-comparision.html">Vehicle Comparision</a></li>
+                                <li><a href="results-list.php">List View</a></li>
+                                <li><a href="results-grid.php">Grid View</a></li>
+                                <li><a href="vehicle-details.php">Vehicle Details</a></li>
+                                <li><a href="add-listing-form.php">Add new listing</a></li>
+                                <li><a href="vehicle-comparision.php">Vehicle Comparision</a></li>
                             </ul>
                         </li>
                         <li><a href="javascript:void(0)">Users</a>
                             <ul class="dropdown">
-                                <li><a href="dealer-prosite.html">Dealer Prosite</a></li>
-                                <li><a href="user-dashboard.html">User Dashboard</a></li>
-                                <li><a href="user-dashboard-saved-searches.html">Manage Saved Searches</a></li>
-                                <li><a href="user-dashboard-saved-cars.html">Manage Saved Cars</a></li>
-                                <li><a href="user-dashboard-manage-ads.html">Manage Ads</a></li>
-                                <li><a href="user-dashboard-profile.html">User Profile</a></li>
-                                <li><a href="user-dashboard-settings.html">User Settings</a></li>
+                                <li><a href="dealer-prosite.php">Dealer Prosite</a></li>
+                                <li><a href="user-dashboard.php">User Dashboard</a></li>
+                                <li><a href="user-dashboard-saved-searches.php">Manage Saved Searches</a></li>
+                                <li><a href="user-dashboard-saved-cars.php">Manage Saved Cars</a></li>
+                                <li><a href="user-dashboard-manage-ads.php">Manage Ads</a></li>
+                                <li><a href="user-dashboard-profile.php">User Profile</a></li>
+                                <li><a href="user-dashboard-settings.php">User Settings</a></li>
                             </ul>
                         </li>
                         <li><a href="javascript:void(0)">Gallery</a>
                             <ul class="dropdown">
-                                <li><a href="gallery-2cols.html">Gallery 2 Columns</a></li>
-                                <li><a href="gallery-3cols.html">Gallery 3 Columns</a></li>
-                                <li><a href="gallery-4cols.html">Gallery 4 Columns</a></li>
-                                <li><a href="gallery-2cols-details.html">Gallery 2 Columns with Details</a></li>
-                                <li><a href="gallery-3cols-details.html">Gallery 3 Columns with Details</a></li>
-                                <li><a href="gallery-4cols-details.html">Gallery 4 Columns with Details</a></li>
+                                <li><a href="gallery-2cols.php">Gallery 2 Columns</a></li>
+                                <li><a href="gallery-3cols.php">Gallery 3 Columns</a></li>
+                                <li><a href="gallery-4cols.php">Gallery 4 Columns</a></li>
+                                <li><a href="gallery-2cols-details.php">Gallery 2 Columns with Details</a></li>
+                                <li><a href="gallery-3cols-details.php">Gallery 3 Columns with Details</a></li>
+                                <li><a href="gallery-4cols-details.php">Gallery 4 Columns with Details</a></li>
                             </ul>
                         </li>
                         <li><a href="javascript:void(0)">Blog</a>
                             <ul class="dropdown">
-                                <li><a href="blog.html">Blog List</a></li>
-                                <li><a href="blog-masonry.html">Blog Masonry</a></li>
-                                <li><a href="single-post.html">Single Post</a></li>
-                                <li><a href="single-post-review.html">Single Review Post</a></li>
+                                <li><a href="blog.php">Blog List</a></li>
+                                <li><a href="blog-masonry.php">Blog Masonry</a></li>
+                                <li><a href="single-post.php">Single Post</a></li>
+                                <li><a href="single-post-review.php">Single Review Post</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -463,14 +463,14 @@
     		<div class="container">
                	<div class="row">
                   	<ul class="owl-carousel carousel-alt" data-columns="6" data-autoplay="" data-pagination="no" data-arrows="yes" data-single-item="no" data-items-desktop="6" data-items-desktop-small="4" data-items-mobile="3" data-items-tablet="4">
-                    	<li class="item"> <a href="results.grid.html"><img src="images/body-types/wagon.png" alt=""> <span>Wagon</span></a></li>
-                    	<li class="item"> <a href="results.grid.html"><img src="images/body-types/minivan.png" alt=""> <span>Minivan</span></a></li>
-                    	<li class="item"> <a href="results.grid.html"><img src="images/body-types/coupe.png" alt=""> <span>Coupe</span></a></li>
-                    	<li class="item"> <a href="results.grid.html"><img src="images/body-types/convertible.png" alt=""> <span>Convertible</span></a></li>
-                    	<li class="item"> <a href="results.grid.html"><img src="images/body-types/crossover.png" alt=""> <span>Crossover</span></a></li>
-                    	<li class="item"> <a href="results.grid.html"><img src="images/body-types/suv.png" alt=""> <span>SUV</span></a></li>
-                    	<li class="item"> <a href="results.grid.html"><img src="images/body-types/minicar.png" alt=""> <span>Minicar</span></a></li>
-                    	<li class="item"> <a href="results.grid.html"><img src="images/body-types/sedan.png" alt=""> <span>Sedan</span></a></li>
+                    	<li class="item"> <a href="results-grid.php?categ=wagon"><img src="images/body-types/wagon.png" alt=""> <span>Wagon</span></a></li>
+                    	<li class="item"> <a href="results-grid.php?categ=minivan"><img src="images/body-types/minivan.png" alt=""> <span>Minivan</span></a></li>
+                    	<li class="item"> <a href="results-grid.php?categ=coupe"><img src="images/body-types/coupe.png" alt=""> <span>Coupe</span></a></li>
+                    	<li class="item"> <a href="results-grid.php?categ=convertible"><img src="images/body-types/convertible.png" alt=""> <span>Convertible</span></a></li>
+                    	<li class="item"> <a href="results-grid.php?categ=crossover"><img src="images/body-types/crossover.png" alt=""> <span>Crossover</span></a></li>
+                    	<li class="item"> <a href="results-grid.php?categ=suv"><img src="images/body-types/suv.png" alt=""> <span>SUV</span></a></li>
+                    	<li class="item"> <a href="results-grid.php?categ=minicar"><img src="images/body-types/minicar.png" alt=""> <span>Minicar</span></a></li>
+                    	<li class="item"> <a href="results-grid.php?categ=sedan"><img src="images/body-types/sedan.png" alt=""> <span>Sedan</span></a></li>
                   	</ul>
                	</div>
             </div>
