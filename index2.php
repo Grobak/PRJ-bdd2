@@ -1,7 +1,14 @@
-<?php
-
-    require_once('includes/header2.html');
-
+<?php 
+    $host = "localhost"; //var host = "localhost";
+    $user = "root";
+    $password = "";
+    $database = "bob_bob";//nom de la base de données
+    
+    $conn = mysqli_connect($host, $user, $password, $database);
+    if(!$conn)//lorsqu'il n'y a qu'une seule ligne, les accolades ne sont pas obligatoires
+    die("Error 502 - " .mysqli_connect_error());//die("Error 502 - " + mysqli_connect_error());
+    
+    require_once('includes/header.html');
 ?>
     <!-- Start Body Content -->
   	<div class="main" role="main">
