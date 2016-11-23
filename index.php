@@ -2,6 +2,7 @@
 	$host = "localhost"; //var host = "localhost";
 	$user = "root";
 	$password = "";
+	$password = "root";
 	$database = "bob_bob";//nom de la base de données
 	
 	$conn = mysqli_connect($host, $user, $password, $database);

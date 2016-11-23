@@ -1,6 +1,7 @@
 <?php 
 	$host = "localhost"; 
 	$user = "root";
+	$password = "root";
 	$database = "bob_bob";
 	
 	$conn = mysqli_connect($host, $user, $password, $database);
@@ -17,10 +18,11 @@
             marques
         ON 
             voitures.marques_idMarque = marques.idMarque ";
-    if(isset($_GET['categ'])){
+    if(isset($_GET['categ']) && $_GET['categ'] != 'all'){
         $sql .= "
         WHERE voitures.categorie = '".$_GET['categ']."'";
     }
+    $sql .= "ORDER BY voitures.modele ASC";
 		
 	$reponse = mysqli_query($conn, $sql);
 
