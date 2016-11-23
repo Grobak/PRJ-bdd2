@@ -102,7 +102,7 @@
                         <li><a href="javascript:void(0)">Pages</a>
                             <ul class="dropdown">
                                 <li><a href="about.php">About Us</a></li>
-                                <li><a href="contact.php">Contact Us</a></li>
+                                <li><a href="contact.html">Contact Us</a></li>
                                 <li><a href="joinus.html">Signup</a></li>
                                 <li><a href="404.php">404 Error Page</a></li>
                                 <li><a href="add-listing-pricing.html">Pricing</a></li>
@@ -449,14 +449,14 @@
     		<div class="container">
                	<div class="row">
                   	<ul class="owl-carousel carousel-alt" data-columns="6" data-autoplay="" data-pagination="no" data-arrows="yes" data-single-item="no" data-items-desktop="6" data-items-desktop-small="4" data-items-mobile="3" data-items-tablet="4">
-                    	<li class="item"> <a href="results-list.php"><img src="images/body-types/wagon.png" alt=""> <span>Wagon</span></a></li>
-                    	<li class="item"> <a href="results-list.php"><img src="images/body-types/minivan.png" alt=""> <span>Minivan</span></a></li>
-                    	<li class="item"> <a href="results-list.php"><img src="images/body-types/coupe.png" alt=""> <span>Coupe</span></a></li>
-                    	<li class="item"> <a href="results-list.php"><img src="images/body-types/convertible.png" alt=""> <span>Convertible</span></a></li>
-                    	<li class="item"> <a href="results-list.php"><img src="images/body-types/crossover.png" alt=""> <span>Crossover</span></a></li>
-                    	<li class="item"> <a href="results-list.php"><img src="images/body-types/suv.png" alt=""> <span>SUV</span></a></li>
-                    	<li class="item"> <a href="results-list.php#"><img src="images/body-types/minicar.png" alt=""> <span>Minicar</span></a></li>
-                    	<li class="item"> <a href="results-list.php"><img src="images/body-types/sedan.png" alt=""> <span>Sedan</span></a></li>
+                    	<li class="item"> <a href="results-list.php?categ=wagon"><img src="images/body-types/wagon.png" alt=""> <span>Wagon</span></a></li>
+                    	<li class="item"> <a href="results-list.php?categ=minivan"><img src="images/body-types/minivan.png" alt=""> <span>Minivan</span></a></li>
+                    	<li class="item"> <a href="results-list.php?categ=coupe"><img src="images/body-types/coupe.png" alt=""> <span>Coupe</span></a></li>
+                    	<li class="item"> <a href="results-list.php?categ=convertible"><img src="images/body-types/convertible.png" alt=""> <span>Convertible</span></a></li>
+                    	<li class="item"> <a href="results-list.php?categ=crossover"><img src="images/body-types/crossover.png" alt=""> <span>Crossover</span></a></li>
+                    	<li class="item"> <a href="results-list.php?categ=suv"><img src="images/body-types/suv.png" alt=""> <span>SUV</span></a></li>
+                    	<li class="item"> <a href="results-list.php?categ=minicar"><img src="images/body-types/minicar.png" alt=""> <span>Minicar</span></a></li>
+                    	<li class="item"> <a href="results-list.php?categ=sedan"><img src="images/body-types/sedan.png" alt=""> <span>Sedan</span></a></li>
                   	</ul>
                	</div>
             </div>
