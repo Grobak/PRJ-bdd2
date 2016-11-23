@@ -1,7 +1,6 @@
 <?php 
 	$host = "localhost"; 
 	$user = "root";
-	$password = "";
 	$database = "bob_bob";
 	
 	$conn = mysqli_connect($host, $user, $password, $database);
@@ -18,9 +17,13 @@
             marques
         ON 
             voitures.marques_idMarque = marques.idMarque ";
-			
+    if(isset($_GET['categ'])){
+        $sql .= "
+        WHERE voitures.categorie = '".$_GET['categ']."'";
+    }
+		
 	$reponse = mysqli_query($conn, $sql);
-	
+
 	$vehicule = array();
 	
 	$i = 0 ;
@@ -38,7 +41,7 @@
 							);
 		}
 	}
-		
+
 	require_once('includes/header.html');
 ?>
     <!-- Start Body Content -->
