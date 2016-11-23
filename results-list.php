@@ -375,8 +375,8 @@
                                                 <div class="result-item-features">
                                                     <ul class="inline">
                                                         <li><?php echo $vehicule[$i][5]; ?> door SUV</li>
-                                                        <li>6 cyl, 3.0 L Petrol</li>
-                                                        <li>6 speed Automatic</li>
+                                                        <li><?php echo $vehicule[$i][19]; ?> Petrol</li>
+                                                        <li><?php echo $vehicule[$i][8]; ?></li>
                                                         <li>4x4 Wheel Drive</li>
                                                         <li>Listed by Individual</li>
                                                     </ul>
