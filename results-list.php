@@ -28,10 +28,11 @@
 	if(mysqli_num_rows($reponse) > 0 ){
 		while($row = mysqli_fetch_assoc($reponse)){
 			$vehicule[] = array(
-								$row['immatriculation'], $row['dateAchat'], $row['killometrage'],
-								$row['comsommation'], $row['carburant'], $row['nbPortes'],
-								$row['nbPlaces'], $row['modele'], $row['marque'], 
-								$row['categorie'], $row['agence'], $row['adresse']
+								$row['immatriculation'], $row['annee'], $row['dateAchat'], 
+                                $row['killometrage'], $row['comsommation'], $row['carburant'], 
+                                $row['nbPortes'], $row['nbPlaces'], $row['modele'],
+								$row['marque'], $row['categorie'], $row['agence'],
+								$row['adresse'], $row['tarif']
 							);
 		}
 	}
@@ -324,10 +325,11 @@
                                 	
                                     <?php
                                     /*
-                                        $row['immatriculation'], $row['dateAchat'], $row['killometrage'],
-                                        $row['comsommation'], $row['carburant'], $row['nbPortes'],
-                                        $row['nbPlaces'], $row['modele'], $row['marque'], 
-                                        $row['categorie'], $row['agence'], $row['adresse']
+                                        $row['immatriculation'], $row['annee'], $row['dateAchat'], 
+                                        $row['killometrage'], $row['comsommation'], $row['carburant'], 
+                                        $row['nbPortes'], $row['nbPlaces'], $row['modele'],
+                                        $row['marque'], $row['categorie'], $row['agence'],
+                                        $row['adresse'], $row['tarif']
                                     */
                                         for($i = 0 ; $i < sizeof($vehicule) ; $i++) { ?>
                                             <div class="result-item format-standard">
@@ -343,7 +345,11 @@
                                                 </div>
                                             </div>
                                             <div class="result-item-in">
-                                                <h4 class="result-item-title"><a href="vehicle-details.php?vehicule=<?php echo $vehicule[$i][0]; ?>"><?php echo $vehicule[$i][8].' '.$vehicule[$i][7]; ?></a></h4>
+                                                <h4 class="result-item-title">
+                                                    <a href="vehicle-details.php?vehicule=<?php echo $vehicule[$i][0]; ?>">
+                                                        <?php echo $vehicule[$i][9].' '.$vehicule[$i][8]; ?>
+                                                    </a>
+                                                </h4>
                                                 <div class="result-item-cont">
                                                     <div class="result-item-block col1">
                                                         <p>
@@ -352,7 +358,7 @@
                                                     </div>
                                                     <div class="result-item-block col2">
                                                         <div class="result-item-pricing">
-                                                            <div class="price"><?php echo $vehicule[$i][11]; ?>$</div>
+                                                            <div class="price"><?php echo $vehicule[$i][13]; ?>$ /day</div>
                                                         </div>
                                                         <div class="result-item-action-buttons">
                                                             <a href="#" class="btn btn-default btn-sm"><i class="fa fa-star-o"></i> Save</a>
@@ -363,11 +369,14 @@
                                                 </div>
                                                 <div class="result-item-features">
                                                     <ul class="inline">
-                                                        <li><?php echo $vehicule[$i][5]; ?> door SUV</li>
-                                                        <li><?php echo $vehicule[$i][19]; ?> Petrol</li>
-                                                        <li><?php echo $vehicule[$i][8]; ?></li>
-                                                        <li>4x4 Wheel Drive</li>
-                                                        <li>Listed by Individual</li>
+                                                        <li><?php echo $vehicule[$i][6]; ?> door SUV</li>
+                                                        <li><?php echo $vehicule[$i][4].' '.$vehicule[$i][5]  ?></li>
+                                                    <?php   
+                                                        $categ = explode(",", $vehicule[$i][10]);
+                                                        foreach ($categ as $k => $v) {
+                                                            echo "<li>".$v."</li>"; 
+                                                        }
+                                                    ?>
                                                     </ul>
                                                 </div> 
                                             </div>
