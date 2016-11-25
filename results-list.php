@@ -2,27 +2,22 @@
 	$host = "localhost"; 
 	$user = "root";
 	$password = "root";
-	$database = "bob_bob";
+	$database = "bdd-prj2";
 	
 	$conn = mysqli_connect($host, $user, $password, $database);
 
 	if(!$conn)
 		die("Error 502 - " .mysqli_connect_error());
 
-    $sql = "
-        SELECT
-            voitures.*,
-            marques.nom
-        FROM voitures
-        LEFT JOIN 
-            marques
-        ON 
-            voitures.marques_idMarque = marques.idMarque ";
     if(isset($_GET['categ']) && $_GET['categ'] != 'all'){
         $sql .= "
-        WHERE voitures.categorie = '".$_GET['categ']."'";
+            WHERE
+                categorie = '".$_GET['categ']."'";
+    }else if((isset($_GET['categ']) && $_GET['categ'] == 'all') || !isset($_GET['categ'])) {
+        $sql = "SELECT * FROM select_all_car";
+    }else if(isset($_GET['available']) && $_GET['available'] == 'now'){
+        $sql = "SELECT * FROM select_available_car_now";
     }
-    $sql .= "ORDER BY voitures.modele ASC";
 		
 	$reponse = mysqli_query($conn, $sql);
 
@@ -33,14 +28,10 @@
 	if(mysqli_num_rows($reponse) > 0 ){
 		while($row = mysqli_fetch_assoc($reponse)){
 			$vehicule[] = array(
-								$row['idVoitures'], $row['modele'], $row['immatriculation'],
-								$row['numeroSerie'], $row['img_voiture'], $row['nbrDePortes'],
-								$row['nbrDePlaces'], $row['categorie'], $row['transmission'], 
-								$row['kilometrage'], $row['annee'], $row['prix_achat'],
-								$row['tarif_idTarif'], $row['reservations_libre'], $row['marques_idMarque'],
-								$row['concessionnaires_idConcessionnaire'], $row['agence_idAgence'], $row['nom'], 
-								$row['energie'], $row['consumption'], $row['categorie']
-                                
+								$row['immatriculation'], $row['dateAchat'], $row['killometrage'],
+								$row['comsommation'], $row['carburant'], $row['nbPortes'],
+								$row['nbPlaces'], $row['modele'], $row['marque'], 
+								$row['categorie'], $row['agence'], $row['adresse']
 							);
 		}
 	}
@@ -333,22 +324,18 @@
                                 	
                                     <?php
                                     /*
-                                        
-                                            $data['idVoitures'], $data['modele'], $data['immatriculation'],
-                                            $data['numeroSerie'], $data['img_voiture'], $data['nbrDePortes'],
-                                            $data['nbrDePlaces'], $data['categorie'], $data['transmission'], 
-                                            $data['kilometrage'], $data['annee'], $data['prix_achat'],
-                                            $data['tarif_idTarif'], $data['reservations_libre'], $data['marques_idMarque'],
-                                            $data['concessionnaires_idConcessionnaire'], $data['agence_idAgence'], $data['nom']
-
+                                        $row['immatriculation'], $row['dateAchat'], $row['killometrage'],
+                                        $row['comsommation'], $row['carburant'], $row['nbPortes'],
+                                        $row['nbPlaces'], $row['modele'], $row['marque'], 
+                                        $row['categorie'], $row['agence'], $row['adresse']
                                     */
                                         for($i = 0 ; $i < sizeof($vehicule) ; $i++) { ?>
                                             <div class="result-item format-standard">
                                             <div class="result-item-image">
                                                 <a href="vehicle-details.php?vehicule=<?php echo $vehicule[$i][0]; ?>" class="media-box">
-                                                    <img src="images/<?php echo $vehicule[$i][1]; ?>/img<?php echo $vehicule[$i][1]; ?>.jpg" alt="">
+                                                    <img src="images/<?php echo $vehicule[$i][7]; ?>/img<?php echo $vehicule[$i][7]; ?>.jpg" alt="">
                                                 </a>
-                                                <span class="label label-default vehicle-age"><?php echo $vehicule[$i][10]; ?></span>
+                                                <span class="label label-default vehicle-age"><?php echo $vehicule[$i][1]; ?></span>
                                                 <span class="label label-success premium-listing">Premium Listing</span>
                                                 <div class="result-item-view-buttons">
                                                     <a href="https://www.youtube.com/watch?v=P5mvnA4BV7Y" data-rel="prettyPhoto"><i class="fa fa-play"></i> View video</a>
@@ -356,10 +343,12 @@
                                                 </div>
                                             </div>
                                             <div class="result-item-in">
-                                                <h4 class="result-item-title"><a href="vehicle-details.php?vehicule=<?php echo $vehicule[$i][0]; ?>"><?php echo $vehicule[$i][17].' '.$vehicule[$i][1]; ?></a></h4>
+                                                <h4 class="result-item-title"><a href="vehicle-details.php?vehicule=<?php echo $vehicule[$i][0]; ?>"><?php echo $vehicule[$i][8].' '.$vehicule[$i][7]; ?></a></h4>
                                                 <div class="result-item-cont">
                                                     <div class="result-item-block col1">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus. Donec facilisis fermentum sem, ac viverra ante luctus vel. Donec vel mauris quam..</p>
+                                                        <p>
+                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus. Donec facilisis fermentum sem, ac viverra ante luctus vel. Donec vel mauris quam..
+                                                        </p>
                                                     </div>
                                                     <div class="result-item-block col2">
                                                         <div class="result-item-pricing">
