@@ -363,7 +363,7 @@
                                             <ul class="inline">
                                                 <li><?php echo $vehicule[$i][5]; ?> SUV</li>
                                                 <li><?php echo $vehicule[$i][19]; ?> Petrol</li>
-                                                <li>6 speed Automatic</li>
+                                                <li><?php echo $vehicule[$i][8]; ?></li>
                                                 <li>4x4 Wheel Drive</li>
                                                 <li>Listed by Individual</li>
                                             </ul>

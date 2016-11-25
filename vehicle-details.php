@@ -1,6 +1,7 @@
 <?php
 	$host = "localhost"; 
 	$user = "root";
+    $password = "root";
 	$database = "bob_bob";
 	
 	$conn = mysqli_connect($host, $user, $password, $database);
@@ -49,7 +50,7 @@
         die("Erreur, le véhicule demandé n'existe pas.");
     }
 	
-	require_once('includes/header.html');
+	require_once('includes/header.php');
 ?>
     <!-- Start Body Content -->
   	<div class="main" role="main">
