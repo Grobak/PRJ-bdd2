@@ -2,54 +2,40 @@
 	$host = "localhost"; 
 	$user = "root";
     $password = "root";
-	$database = "bob_bob";
+	$database = "bdd-prj2";
 	
 	$conn = mysqli_connect($host, $user, $password, $database);
 
-		if(!$conn)
-		die("Error 502 - " .mysqli_connect_error());
+	if(!$conn){
+    	die("Error 502 - " .mysqli_connect_error());
+    }
 	else
-   $req = "SELECT
-            voitures.*,
-            marques.nom
-            FROM voitures
-            LEFT JOIN 
-                marques
-            ON 
-                voitures.marques_idMarque = marques.idMarque
-                WHERE idVoitures = ";
-				
+    $req = '';
+
+    if(isset($_GET['comments'])){
+        $req = "INSERT INTO commentaires('name', 'mail', 'phone', 'location', 'comment') VALUES"
+    }
+
     if(isset($_GET['vehicule'])){
-
-        $req .= $_GET['vehicule'];
-
-    }else if(isset($_GET['enquire'])){
-        
-        $req .= $_GET['enquire'];
-
+        $req = "SELECT * FROM select_one_car WHERE immatriculation = '".$_GET['vehicule']."' LIMIT 0,1";
+    }else{
+        $req = '';
     }
-	$reponse = mysqli_query($conn, $req);
 
-
-    $vehicule = array();
-
-
-    if(mysqli_num_rows($reponse) > 0 ){
-		while($row = mysqli_fetch_assoc($reponse)){
-			$vehicule[] = array(
-									$row['idVoitures'], $row['modele'], $row['immatriculation'],
-									$row['numeroSerie'], $row['img_voiture'], $row['nbrDePortes'],
-									$row['nbrDePlaces'], $row['categorie'], $row['transmission'], 
-									$row['kilometrage'], $row['annee'], $row['prix_achat'],
-									$row['tarif_idTarif'], $row['reservations_libre'], $row['marques_idMarque'],
-									$row['concessionnaires_idConcessionnaire'], $row['agence_idAgence'], $row['nom'], 
-									$row['energie'], $row['energie'], $row['consumption']
-								);
-		}
+    if($req != ''){
+        $reponse = mysqli_query($conn, $req);
+     
+        $cars = array();  
+    
+        if(mysqli_num_rows($reponse) > 0 ){
+            $cars = mysqli_fetch_row($reponse);
+            // var_dump($cars);
+            // echo $cars[0];
+            // die();
+        }
 	}else{
-        die("Erreur, le véhicule demandé n'existe pas.");
+        $cars = 'Le véhicule demandé n\'existe pas.';
     }
-	
 	require_once('includes/header.php');
 ?>
     <!-- Start Body Content -->
@@ -57,21 +43,20 @@
     	<div id="content" class="content full">
         	<div class="container">
             	<!-- Vehicle Details -->
-                <?php
-                        /*  $data['idVoitures'], $data['modele'], $data['immatriculation'],
-                            $data['numeroSerie'], $data['img_voiture'], $data['nbrDePortes'],
-                            $data['nbrDePlaces'], $data['categorie'], $data['transmission'], 
-                            $data['kilometrage'], $data['annee'], $data['prix_achat'],
-                            $data['tarif_idTarif'], $data['reservations_libre'], $data['marques_idMarque'],
-                            $data['concessionnaires_idConcessionnaire'], $data['agence_idAgence'], $data['nom'], $data['comsumption'], $data['energie'] 
+            <?php
+                        /*      
+                                immatriculation annee killometrage
+                                comsommation nbPortes nbPlaces
+                                transmission carburant modele 
+                                marque agence adresse
                         */
-                ?>
+                if(is_array($cars)){
+            ?>
 
-
-                <article class="single-vehicle-details">
+                    <article class="single-vehicle-details">
                     <div class="single-vehicle-title">
                         <span class="badge-premium-listing">Premium listing</span>
-                        <h2 class="post-title"><?php echo $vehicule[0][17].' '.$vehicule[0][1]; ?></h2>
+                        <h2 class="post-title"><?php echo $cars[9].' '.$cars[8]; ?></h2>
                     </div>
                     <div class="single-listing-actions">
                         <div class="btn-group pull-right" role="group">
@@ -83,21 +68,23 @@
                             <a href="#" class="btn btn-default" title="Download Manual"><i class="fa fa-book"></i> <span>Download Manual</span></a>
                             <a href="javascript:void(0)" onclick="window.print();" class="btn btn-default" title="Print"><i class="fa fa-print"></i> <span>Print</span></a>
                         </div>
-                        <div class="btn btn-info price"><?php echo $vehicule[0][11]; ?>$</div>
+                        <div class="btn btn-info price"><?php echo $cars[12]; ?>$ per hour</div>
                     </div>
                     <div class="row">
                         <div class="col-md-8">
                             <div class="single-listing-images">
                                 <div class="featured-image format-image">
-                                    <a href="http://placehold.it/890x600&amp;text=IMAGE+PLACEHOLDER" data-rel="prettyPhoto[gallery]" class="media-box"><img src="images/<?php echo $vehicule[0][1]; ?>/img<?php echo $vehicule[0][1]; ?>.jpg" alt=""></a>
+                                    <a href="images/<?php echo $cars[9]; ?>/img<?php echo $cars[8]; ?>.jpg" data-rel="prettyPhoto[gallery]" class="media-box">
+                                        <img src="images/<?php echo $cars[9]; ?>/img<?php echo $cars[8]; ?>.jpg" alt="">
+                                    </a>
                                 </div>
                                 <div class="additional-images">
                                         <ul class="owl-carousel" data-columns="4" data-pagination="no" data-arrows="yes" data-single-item="no" data-items-desktop="4" data-items-desktop-small="4" data-items-tablet="3" data-items-mobile="3">
-                                            <li class="item format-video"> <a href="https://www.youtube.com/watch?v=P5mvnA4BV7Y" data-rel="prettyPhoto[gallery]" class="media-box"><img src="images/<?php echo $vehicule[0][1]; ?>/img<?php echo $vehicule[0][1]; ?>-0.jpg" alt=""></a></li>
-                                            <li class="item format-image"> <a href="http://placehold.it/600x400&amp;text=IMAGE+PLACEHOLDER" data-rel="prettyPhoto[gallery]" class="media-box"><img src="images/<?php echo $vehicule[0][1]; ?>/img<?php echo $vehicule[0][1]; ?>-1.jpg" alt=""></a></li>
-                                            <li class="item format-image"> <a href="http://placehold.it/600x400&amp;text=IMAGE+PLACEHOLDER" data-rel="prettyPhoto[gallery]" class="media-box"><img src="images/<?php echo $vehicule[0][1]; ?>/img<?php echo $vehicule[0][1]; ?>-2.jpg" alt=""></a></li>
-                                            <li class="item format-image"> <a href="http://placehold.it/600x400&amp;text=IMAGE+PLACEHOLDER" data-rel="prettyPhoto[gallery]" class="media-box"><img src="images/<?php echo $vehicule[0][1]; ?>/img<?php echo $vehicule[0][1]; ?>-3.jpg" alt=""></a></li>
-                                            <li class="item format-image"> <a href="http://placehold.it/600x400&amp;text=IMAGE+PLACEHOLDER" data-rel="prettyPhoto[gallery]" class="media-box"><img src="images/<?php echo $vehicule[0][1]; ?>/img<?php echo $vehicule[0][1]; ?>-4.jpg" alt=""></a></li>
+                                            <li class="item format-image"> <a href="images/<?php echo $cars[9]; ?>/img<?php echo $cars[8]; ?>-0.jpg" data-rel="prettyPhoto[gallery]" class="media-box"><img src="images/<?php echo $cars[9]; ?>/img<?php echo $cars[8]; ?>-0.jpg" alt=""></a></li>
+                                            <li class="item format-image"> <a href="images/<?php echo $cars[9]; ?>/img<?php echo $cars[8]; ?>-1.jpg" data-rel="prettyPhoto[gallery]" class="media-box"><img src="images/<?php echo $cars[9]; ?>/img<?php echo $cars[8]; ?>-1.jpg" alt=""></a></li>
+                                            <li class="item format-image"> <a href="images/<?php echo $cars[9]; ?>/img<?php echo $cars[8]; ?>-2.jpg" data-rel="prettyPhoto[gallery]" class="media-box"><img src="images/<?php echo $cars[9]; ?>/img<?php echo $cars[8]; ?>-2.jpg" alt=""></a></li>
+                                            <li class="item format-image"> <a href="images/<?php echo $cars[9]; ?>/img<?php echo $cars[8]; ?>-3.jpg" data-rel="prettyPhoto[gallery]" class="media-box"><img src="images/<?php echo $cars[9]; ?>/img<?php echo $cars[8]; ?>-3.jpg" alt=""></a></li>
+                                            <li class="item format-image"> <a href="images/<?php echo $cars[9]; ?>/img<?php echo $cars[8]; ?>-4.jpg" data-rel="prettyPhoto[gallery]" class="media-box"><img src="images/<?php echo $cars[9]; ?>/img<?php echo $cars[8]; ?>-4.jpg" alt=""></a></li>
                                         </ul>
                                 </div>
                             </div>
@@ -105,14 +92,14 @@
                         <div class="col-md-4">
                             <div class="sidebar-widget widget">
                                 <ul class="list-group">
-                                    <li class="list-group-item"> <span class="badge">Year</span> <?php echo $vehicule[0][10]; ?></li>
-                                    <li class="list-group-item"> <span class="badge">Make</span> <?php echo $vehicule[0][17]; ?></li>
-                                    <li class="list-group-item"> <span class="badge">Model</span> <?php echo $vehicule[0][1]; ?></li>
-                                    <li class="list-group-item"> <span class="badge">Body style</span> <?php echo $vehicule[0][7]; ?></li>
-                                    <li class="list-group-item"> <span class="badge">Mileage</span> <?php echo $vehicule[0][9]; ?> km</li>
-                                    <li class="list-group-item"> <span class="badge">Transmission</span><?php echo $vehicule[0][8]; ?></li>
-                                    <li class="list-group-item"> <span class="badge">Consumption</span><?php echo $vehicule[0][18]; ?> L/100km</li>
-                                    <li class="list-group-item"> <span class="badge">Fuel type</span><?php echo $vehicule[0][19]; ?></li>
+                                    <li class="list-group-item"> <span class="badge">Year</span> <?php echo $cars[1]; ?></li>
+                                    <li class="list-group-item"> <span class="badge">Make</span> <?php echo $cars[9]; ?></li>
+                                    <li class="list-group-item"> <span class="badge">Model</span> <?php echo $cars[8]; ?></li>
+                                    <li class="list-group-item"> <span class="badge">Body style</span> <?php echo $cars[13]; ?></li>
+                                    <li class="list-group-item"> <span class="badge">Mileage</span> <?php echo $cars[2]; ?> km</li>
+                                    <li class="list-group-item"> <span class="badge">Transmission</span><?php echo $cars[6]; ?></li>
+                                    <li class="list-group-item"> <span class="badge">Consumption</span><?php echo $cars[3]; ?></li>
+                                    <li class="list-group-item"> <span class="badge">Fuel type</span><?php echo $cars[7]; ?></li>
                                 </ul>
                             </div>
                         </div>
@@ -453,7 +440,12 @@
                          	</div>
                         </div>
                     </div>
-                </article>
+                    </article>
+            <?php
+                }else{
+
+                }
+            ?>
                 <div class="clearfix"></div>
             </div>
         </div>

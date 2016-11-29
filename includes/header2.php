@@ -1,3 +1,51 @@
+<?php
+
+    $host = "localhost"; 
+    $user = "root";
+    $password = "root";
+    $database = "bdd-prj2";
+    
+    $conn = mysqli_connect($host, $user, $password, $database);
+
+    if(!$conn)
+        die("Error 502 - " .mysqli_connect_error());
+
+    $sql = "SELECT * FROM ";
+    if(isset($_GET['categ']) && $_GET['categ'] != 'all'){
+        $sql .= "select_all_car WHERE categorie LIKE '%".$_GET['categ']."%'";
+    }else if((isset($_GET['categ']) && $_GET['categ'] == 'all') || !isset($_GET['categ'])) {
+        $sql .= "select_all_car";
+    }else if(isset($_GET['available']) && $_GET['available'] == 'now'){
+        $sql .= "select_available_car_now";
+    }else{
+        $sql = '';
+    }
+
+    $vehicule = array();
+        
+    if($sql != ''){
+        $reponse = mysqli_query($conn, $sql);
+    
+        $vehicule = array();
+        
+        $i = 0 ;
+        
+        if(mysqli_num_rows($reponse) > 0 ){
+            while($row = mysqli_fetch_assoc($reponse)){
+                $vehicule[] = array(
+                                    $row['immatriculation'], $row['annee'], $row['dateAchat'], 
+                                    $row['killometrage'], $row['comsommation'], $row['carburant'], 
+                                    $row['nbPortes'], $row['nbPlaces'], $row['modele'],
+                                    $row['marque'], $row['categorie'], $row['agence'],
+                                    $row['adresse'], $row['tarif']
+                                );
+            }
+        }
+    }else{
+        $vehicule = "Aucun véhicule n'a été trouvé avec les critères de recherche.";
+    }
+
+?>
 <!DOCTYPE HTML>
 <html class="no-js">
 <head>
