@@ -1,9 +1,57 @@
-<!DOCTYPE php>
-<php class="no-js">
+<?php
+
+    $host = "localhost"; 
+    $user = "root";
+    $password = "root";
+    $database = "bdd-prj2";
+    
+    $conn = mysqli_connect($host, $user, $password, $database);
+
+    if(!$conn)
+        die("Error 502 - " .mysqli_connect_error());
+
+    $sql = "SELECT * FROM ";
+    if(isset($_GET['categ']) && $_GET['categ'] != 'all'){
+        $sql .= "select_all_car WHERE categorie LIKE '%".$_GET['categ']."%'";
+    }else if((isset($_GET['categ']) && $_GET['categ'] == 'all') || !isset($_GET['categ'])) {
+        $sql .= "select_all_car";
+    }else if(isset($_GET['available']) && $_GET['available'] == 'now'){
+        $sql .= "select_available_car_now";
+    }else{
+        $sql = '';
+    }
+
+    $vehicule = array();
+        
+    if($sql != ''){
+        $reponse = mysqli_query($conn, $sql);
+    
+        $vehicule = array();
+        
+        $i = 0 ;
+        
+        if(mysqli_num_rows($reponse) > 0 ){
+            while($row = mysqli_fetch_assoc($reponse)){
+                $vehicule[] = array(
+                                    $row['immatriculation'], $row['annee'], $row['dateAchat'], 
+                                    $row['killometrage'], $row['comsommation'], $row['carburant'], 
+                                    $row['nbPortes'], $row['nbPlaces'], $row['modele'],
+                                    $row['marque'], $row['categorie'], $row['agence'],
+                                    $row['adresse'], $row['tarif']
+                                );
+            }
+        }
+    }else{
+        $vehicule = "Aucun véhicule n'a été trouvé avec les critères de recherche.";
+    }
+
+?>
+<!DOCTYPE HTML>
+<html class="no-js">
 <head>
 <!-- Basic Page Needs
   ================================================== -->
-<meta http-equiv="Content-Type" content="text/php; charset=utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>AutoStars - Responsive Car Dealership Template</title>
 <meta name="description" content="">
 <meta name="keywords" content="">
@@ -38,16 +86,32 @@
         <header class="site-header">
             <div class="container sp-cont">
                 <div class="site-logo">
-                    <h1><a href="index.php"><img src="images/logo.png" alt="Logo"></a></h1>
+                    <h1><a href="index2.php"><img src="images/logo.png" alt="Logo"></a></h1>
                     <span class="site-tagline">Buying or Selling,<br>just got easier!</span>
                 </div>
                 <div class="header-right">
-                    <div class="user-login-panel">
-                        <a href="#" class="user-login-btn" data-toggle="modal" data-target="#loginModal"><i class="icon-profile"></i></a>
+                    <div class="user-login-panel logged-in-user">
+                        <a href="#" class="user-login-btn" id="userdropdown" data-toggle="dropdown">
+                            <img src="http://placehold.it/100x100&amp;text=IMAGE+PLACEHOLDER" alt="">
+                            <span class="user-informa">
+                                <span class="meta-data">Welcome</span>
+                                <span class="user-name">Username dss</span>
+                            </span>
+                            <span class="user-dd-dropper"><i class="fa fa-angle-down"></i></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="userdropdown">
+                            <li><a href="user-dashboard.php">Dashboard</a></li>
+                            <li><a href="user-dashboard-saved-searches.php">Saved Searches</a></li>
+                            <li><a href="user-dashboard-saved-cars.php">Saved Cars</a></li>
+                            <li><a href="user-dashboard-manage-ads.php">Manage Ads</a></li>
+                            <li><a href="user-dashboard-profile.php">My Profile</a></li>
+                            <li><a href="user-dashboard-settings.php">Settings</a></li>
+                            <li><a href="#">Log Out</a></li>
+                        </ul>
                     </div>
                     <div class="topnav dd-menu">
                         <ul class="top-navigation sf-menu">
-                            <li><a href="results-list-copie.php">Buy</a></li>
+                            <li><a href="results-list.php">Buy</a></li>
                             <li><a href="add-listing-pricing.php">Sell</a></li>
                             <li><a href="joinus.php">Join</a></li>
                         </ul>
@@ -62,7 +126,7 @@
                     <a href="#" class="search-trigger"><i class="fa fa-search"></i></a>
                     <span><i class="fa fa-phone"></i> Call us <strong>1800 011 2211</strong> <em>or</em> search</span>
                 </div>
-                <a href="#" class="visible-sm visible-xs" id="menu-toggle"><i class="fa fa-bars"></i></a>
+                    <a href="#" class="visible-sm visible-xs" id="menu-toggle"><i class="fa fa-bars"></i></a>
                 <!-- Main Navigation -->
                 <nav class="main-navigation dd-menu toggle-menu" role="navigation">
                     <ul class="sf-menu">
@@ -77,21 +141,21 @@
                                 </li>
                                 <li><a href="javascript:void(0)">Slider versions</a>
                             		<ul class="dropdown">
-                                		<li><a href="index.php">Default(Flexslider)</a></li>
+                                		<li><a href="index2.php">Default(Flexslider)</a></li>
                                 		<li><a href="index-revslider.php">Slider Revolution <span class="label label-danger">New</span></a></li>
                                         <li><a href="hero-carousel.php">Full Width Carousel</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="javascript:void(0)">Search Form Positions</a>
                             		<ul class="dropdown">
-                                		<li><a href="index.php">Default(With Main Menu)</a></li>
+                                		<li><a href="index2.php">Default(With Main Menu)</a></li>
                                         <li><a href="search-below-slider.php">Below Slider</a></li>
                                         <li><a href="search-over-slider.php">Over Slider</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="javascript:void(0)">Header versions</a>
                             		<ul class="dropdown">
-                                		<li><a href="index.php">Default</a>
+                                		<li><a href="index2.php">Default</a>
                                         <li><a href="header-v2.php">Version 2</a></li>
                                         <li><a href="header-v3.php">Version 3</a></li>
                                         <li><a href="header-v4.php">Version 4</a></li>
@@ -112,45 +176,45 @@
                                 <li><a href="dealers-search-results.php">Dealer Search Results</a></li>
                             </ul>
                         </li>
-                        <li class="megamenu"><a href="index.php">Mega Menu</a>
+                        <li class="megamenu"><a href="index2.php">Mega Menu</a>
                             <ul class="dropdown">
                                 <li>
                                     <div class="megamenu-container container">
                                         <div class="row">
                                             <div class="mm-col col-md-2">
                                                 <ul class="sub-menu">
-                                                    <li><a href="results-list-copie.php">Brand new cars</a></li>
-                                                    <li><a href="results-list-copie.php">Used cars</a></li>
-                                                    <li><a href="results-list-copie.php">Latest reviews</a></li>
+                                                    <li><a href="results-list.php">Brand new cars</a></li>
+                                                    <li><a href="results-list.php">Used cars</a></li>
+                                                    <li><a href="results-list.php">Latest reviews</a></li>
                                                     <li><a href="blog.php">Auto news</a></li>
                                                     <li><a href="about.php">Car insurance</a></li>
                                                 </ul>
                                             </div>
                                             <div class="mm-col col-md-5">
-                                                <span class="megamenu-sub-title">Browse by category</span>
+                                                <span class="megamenu-sub-title">Browse by body type</span>
                                                 <ul class="body-type-widget">
-                                                    <li> <a href="results-list-copie.php?categ=wagon"><img src="images/body-types/wagon.png" alt=""> <span>Wagon</span></a></li>
-                                                    <li> <a href="results-list-copie.php?categ=minivan"><img src="images/body-types/minivan.png" alt=""> <span>Minivan</span></a></li>
-                                                    <li> <a href="results-list-copie.php?categ=coupe"><img src="images/body-types/coupe.png" alt=""> <span>Coupe</span></a></li>
-                                                    <li> <a href="results-list-copie.php?categ=convertible"><img src="images/body-types/convertible.png" alt=""> <span>Convertible</span></a></li>
-                                                    <li> <a href="results-list-copie.php?categ=crossover"><img src="images/body-types/crossover.png" alt=""> <span>Crossover</span></a></li>
-                                                    <li> <a href="results-list-copie.php?categ=suv"><img src="images/body-types/suv.png" alt=""> <span>SUV</span></a></li>
+                                                    <li> <a href="results-list.php"><img src="images/body-types/wagon.png" alt=""> <span>Wagon</span></a></li>
+                                                    <li> <a href="results-list.php"><img src="images/body-types/minivan.png" alt=""> <span>Minivan</span></a></li>
+                                                    <li> <a href="results-list.php"><img src="images/body-types/coupe.png" alt=""> <span>Coupe</span></a></li>
+                                                    <li> <a href="results-list.php"><img src="images/body-types/convertible.png" alt=""> <span>Convertible</span></a></li>
+                                                    <li> <a href="results-list.php"><img src="images/body-types/crossover.png" alt=""> <span>Crossover</span></a></li>
+                                                    <li> <a href="results-list.php"><img src="images/body-types/suv.png" alt=""> <span>SUV</span></a></li>
                                                 </ul>
-                                                <a href="results-list-copie.php?brand=all" class="basic-link">view all</a>
+                                                <a href="results-list.php" class="basic-link">view all</a>
                                             </div>
                                             <div class="mm-col col-md-5">
                                                 <span class="megamenu-sub-title">Browse by make</span>
                                                 <ul class="make-widget">
-                                                    <li class="item"> <a href="results-list-copie.php"><img src="http://placehold.it/100x100&amp;text=IMAGE+PLACEHOLDER" alt=""></a></li>
-                                    				<li class="item"> <a href="results-list-copie.php"><img src="http://placehold.it/100x100&amp;text=IMAGE+PLACEHOLDER" alt=""></a></li>
-                                    				<li class="item"> <a href="results-list-copie.php"><img src="http://placehold.it/100x100&amp;text=IMAGE+PLACEHOLDER" alt=""></a></li>
-                                                    <li class="item"> <a href="results-list-copie.php"><img src="http://placehold.it/100x100&amp;text=IMAGE+PLACEHOLDER" alt=""></a></li>
-                                                    <li class="item"> <a href="results-list-copie.php"><img src="http://placehold.it/100x100&amp;text=IMAGE+PLACEHOLDER" alt=""></a></li>
-                                                    <li class="item"> <a href="results-list-copie.php"><img src="http://placehold.it/100x100&amp;text=IMAGE+PLACEHOLDER" alt=""></a></li>
-                                                    <li class="item"> <a href="results-list-copie.php"><img src="http://placehold.it/100x100&amp;text=IMAGE+PLACEHOLDER" alt=""></a></li>
-                                    				<li class="item"> <a href="results-list-copie.php"><img src="http://placehold.it/100x100&amp;text=IMAGE+PLACEHOLDER" alt=""></a></li>
+                                                    <li class="item"> <a href="results-list.php"><img src="http://placehold.it/100x100&amp;text=IMAGE+PLACEHOLDER" alt=""></a></li>
+                                    				<li class="item"> <a href="results-list.php"><img src="http://placehold.it/100x100&amp;text=IMAGE+PLACEHOLDER" alt=""></a></li>
+                                    				<li class="item"> <a href="results-list.php"><img src="http://placehold.it/100x100&amp;text=IMAGE+PLACEHOLDER" alt=""></a></li>
+                                                    <li class="item"> <a href="results-list.php"><img src="http://placehold.it/100x100&amp;text=IMAGE+PLACEHOLDER" alt=""></a></li>
+                                                    <li class="item"> <a href="results-list.php"><img src="http://placehold.it/100x100&amp;text=IMAGE+PLACEHOLDER" alt=""></a></li>
+                                                    <li class="item"> <a href="results-list.php"><img src="http://placehold.it/100x100&amp;text=IMAGE+PLACEHOLDER" alt=""></a></li>
+                                                    <li class="item"> <a href="results-list.php"><img src="http://placehold.it/100x100&amp;text=IMAGE+PLACEHOLDER" alt=""></a></li>
+                                    				<li class="item"> <a href="results-list.php"><img src="http://placehold.it/100x100&amp;text=IMAGE+PLACEHOLDER" alt=""></a></li>
                                                 </ul>
-                                                <a href="results-list-copie.php?browse=all" class="basic-link">view all</a>
+                                                <a href="results-list.php" class="basic-link">view all</a>
                                             </div>
                                         </div>
                                     </div>
@@ -159,7 +223,7 @@
                         </li>
                         <li><a href="javascript:void(0)">Listing</a>
                             <ul class="dropdown">
-                                <li><a href="results-list-copie.php">List View</a></li>
+                                <li><a href="results-list.php">List View</a></li>
                                 <li><a href="results-grid.php">Grid View</a></li>
                                 <li><a href="vehicle-details.php">Vehicle Details</a></li>
                                 <li><a href="add-listing-form.php">Add new listing</a></li>
@@ -417,10 +481,8 @@
         <!-- Start Hero Slider -->
         <div class="hero-slider heroflex flexslider clearfix" data-autoplay="yes" data-pagination="no" data-arrows="yes" data-style="fade" data-speed="7000" data-pause="yes">
             <ul class="slides">
-                <li class="parallax" style="background-image:url(images/F430/imgF430-1.jpg);"></li>
-                <li class="parallax" style="background-image:url(images/TT/imgTT-4.jpg);"></li>
-                <li class="parallax" style="background-image:url(images/f488/imgf488.jpg);"></li>
-                <li class="parallax" style="background-image:url(images/huracan/huracan1t.jpg);"></li>
+                <li class="parallax" style="background-image:url(http://placehold.it/1400x500&amp;text=IMAGE+PLACEHOLDER);"></li>
+                <li class="parallax" style="background-image:url(http://placehold.it/1400x500&amp;text=IMAGE+PLACEHOLDER);"></li>
             </ul>
         </div>
         <!-- End Hero Slider -->
@@ -449,14 +511,14 @@
     		<div class="container">
                	<div class="row">
                   	<ul class="owl-carousel carousel-alt" data-columns="6" data-autoplay="" data-pagination="no" data-arrows="yes" data-single-item="no" data-items-desktop="6" data-items-desktop-small="4" data-items-mobile="3" data-items-tablet="4">
-                    	<li class="item"> <a href="results-list-copie.php"><img src="images/body-types/wagon.png" alt=""> <span>Wagon</span></a></li>
-                    	<li class="item"> <a href="results-list-copie.php"><img src="images/body-types/minivan.png" alt=""> <span>Minivan</span></a></li>
-                    	<li class="item"> <a href="results-list-copie.php"><img src="images/body-types/coupe.png" alt=""> <span>Coupe</span></a></li>
-                    	<li class="item"> <a href="results-list-copie.php"><img src="images/body-types/convertible.png" alt=""> <span>Convertible</span></a></li>
-                    	<li class="item"> <a href="results-list-copie.php"><img src="images/body-types/crossover.png" alt=""> <span>Crossover</span></a></li>
-                    	<li class="item"> <a href="results-list-copie.php"><img src="images/body-types/suv.png" alt=""> <span>SUV</span></a></li>
-                    	<li class="item"> <a href="results-list-copie.php#"><img src="images/body-types/minicar.png" alt=""> <span>Minicar</span></a></li>
-                    	<li class="item"> <a href="results-list-copie.php"><img src="images/body-types/sedan.png" alt=""> <span>Sedan</span></a></li>
+                    	<li class="item"> <a href="results-grid.php?categ=wagon"><img src="images/body-types/wagon.png" alt=""> <span>Wagon</span></a></li>
+                    	<li class="item"> <a href="results-grid.php?categ=minivan"><img src="images/body-types/minivan.png" alt=""> <span>Minivan</span></a></li>
+                    	<li class="item"> <a href="results-grid.php?categ=coupe"><img src="images/body-types/coupe.png" alt=""> <span>Coupe</span></a></li>
+                    	<li class="item"> <a href="results-grid.php?categ=convertible"><img src="images/body-types/convertible.png" alt=""> <span>Convertible</span></a></li>
+                    	<li class="item"> <a href="results-grid.php?categ=crossover"><img src="images/body-types/crossover.png" alt=""> <span>Crossover</span></a></li>
+                    	<li class="item"> <a href="results-grid.php?categ=suv"><img src="images/body-types/suv.png" alt=""> <span>SUV</span></a></li>
+                    	<li class="item"> <a href="results-grid.php?categ=minicar"><img src="images/body-types/minicar.png" alt=""> <span>Minicar</span></a></li>
+                    	<li class="item"> <a href="results-grid.php?categ=sedan"><img src="images/body-types/sedan.png" alt=""> <span>Sedan</span></a></li>
                   	</ul>
                	</div>
             </div>

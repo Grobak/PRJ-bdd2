@@ -1,3 +1,51 @@
+<?php
+
+    $host = "localhost"; 
+    $user = "root";
+    $password = "root";
+    $database = "bdd-prj2";
+    
+    $conn = mysqli_connect($host, $user, $password, $database);
+
+    if(!$conn)
+        die("Error 502 - " .mysqli_connect_error());
+
+    $sql = "SELECT * FROM ";
+    if(isset($_GET['categ']) && $_GET['categ'] != 'all'){
+        $sql .= "select_all_car WHERE categorie LIKE '%".$_GET['categ']."%'";
+    }else if((isset($_GET['categ']) && $_GET['categ'] == 'all') || !isset($_GET['categ'])) {
+        $sql .= "select_all_car";
+    }else if(isset($_GET['available']) && $_GET['available'] == 'now'){
+        $sql .= "select_available_car_now";
+    }else{
+        $sql = '';
+    }
+
+    $vehicule = array();
+        
+    if($sql != ''){
+        $reponse = mysqli_query($conn, $sql);
+    
+        $vehicule = array();
+        
+        $i = 0 ;
+        
+        if(mysqli_num_rows($reponse) > 0 ){
+            while($row = mysqli_fetch_assoc($reponse)){
+                $vehicule[] = array(
+                                    $row['immatriculation'], $row['annee'], $row['dateAchat'], 
+                                    $row['killometrage'], $row['comsommation'], $row['carburant'], 
+                                    $row['nbPortes'], $row['nbPlaces'], $row['modele'],
+                                    $row['marque'], $row['categorie'], $row['agence'],
+                                    $row['adresse'], $row['tarif']
+                                );
+            }
+        }
+    }else{
+        $vehicule = "Aucun véhicule n'a été trouvé avec les critères de recherche.";
+    }
+
+?>
 <!DOCTYPE HTML>
 <html class="no-js">
 <head>
@@ -38,7 +86,7 @@
         <header class="site-header">
             <div class="container sp-cont">
                 <div class="site-logo">
-                    <h1><a href="index.html"><img src="images/logo.png" alt="Logo"></a></h1>
+                    <h1><a href="index3.php"><img src="images/logo.png" alt="Logo"></a></h1>
                     <span class="site-tagline">Buying or Selling,<br>just got easier!</span>
                 </div>
                 <div class="header-right">
@@ -86,28 +134,28 @@
                             <ul class="dropdown">
                                 <li><a href="javascript:void(0)">Home versions</a>
                                     <ul class="dropdown">
-                                        <li><a href="index.html">Default</a></li>
-                                        <li><a href="index2.html">Version 2</a></li>
-                                        <li><a href="index3.html">Version 3</a></li>
+                                        <li><a href="index.php">Default</a></li>
+                                        <li><a href="index2.php">Version 2</a></li>
+                                        <li><a href="index3.php">Version 3</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="javascript:void(0)">Slider versions</a>
                             		<ul class="dropdown">
-                                		<li><a href="index.html">Default(Flexslider)</a></li>
+                                		<li><a href="index3.php">Default(Flexslider)</a></li>
                                 		<li><a href="index-revslider.html">Slider Revolution <span class="label label-danger">New</span></a></li>
                                         <li><a href="hero-carousel.html">Full Width Carousel</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="javascript:void(0)">Search Form Positions</a>
                             		<ul class="dropdown">
-                                		<li><a href="index.html">Default(With Main Menu)</a></li>
+                                		<li><a href="index3.php">Default(With Main Menu)</a></li>
                                         <li><a href="search-below-slider.html">Below Slider</a></li>
                                         <li><a href="search-over-slider.html">Over Slider</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="javascript:void(0)">Header versions</a>
                             		<ul class="dropdown">
-                                		<li><a href="index.html">Default</a>
+                                		<li><a href="index3.php">Default</a>
                                         <li><a href="header-v2.html">Version 2</a></li>
                                         <li><a href="header-v3.html">Version 3</a></li>
                                         <li><a href="header-v4.html">Version 4</a></li>
@@ -128,7 +176,7 @@
                                 <li><a href="dealers-search-results.html">Dealer Search Results</a></li>
                             </ul>
                         </li>
-                        <li class="megamenu"><a href="index.html">Mega Menu</a>
+                        <li class="megamenu"><a href="index3.php">Mega Menu</a>
                             <ul class="dropdown">
                                 <li>
                                     <div class="megamenu-container container">
@@ -477,409 +525,3 @@
             </div>
         </div>
     </div>
-    <!-- Start Body Content -->
-  	<div class="main" role="main">
-    	<div id="content" class="content full padding-b0">
-            <div class="container">
-                <div class="row">
-                    <!-- Listing Results -->
-                    <div class="col-md-9 results-container">
-                        <section class="listing-block trending-listing">
-                            <div class="listing-header">
-                            	<div class="toggle-view pull-right">
-                                    <div class="btn-group">
-                                        <a href="#" class="btn btn-default active" id="results-list-view"><i class="fa fa-th-list"></i></a>
-                                        <a href="#" class="btn btn-default" id="results-grid-view"><i class="fa fa-th"></i></a>
-                                    </div>
-                                </div>
-                                <h2>Trending Ads</h2>
-                            </div>
-                            <div class="listing-container">
-                                <div class="results-container-in">
-                                    <div class="waiting" style="display:none;">
-                                        <div class="spinner">
-                                            <div class="rect1"></div>
-                                            <div class="rect2"></div>
-                                            <div class="rect3"></div>
-                                            <div class="rect4"></div>
-                                            <div class="rect5"></div>
-                                        </div>
-                                    </div>
-                                    <div id="results-holder" class="results-list-view">
-                                        <!-- Result Item -->
-                                        <div class="result-item format-standard">
-                                            <div class="result-item-image">
-                                                <a href="vehicle-details.html" class="media-box"><img src="http://placehold.it/600x400&amp;text=IMAGE+PLACEHOLDER" alt=""></a>
-                                                <span class="label label-primary vehicle-age">Brand new</span>
-                                                <div class="result-item-view-buttons">
-                                                    <a href="https://www.youtube.com/watch?v=P5mvnA4BV7Y" data-rel="prettyPhoto"><i class="fa fa-play"></i> View video</a>
-                                                    <a href="vehicle-details.html"><i class="fa fa-plus"></i> View details</a>
-                                                </div>
-                                            </div>
-                                            <div class="result-item-in">
-                                                <h4 class="result-item-title"><a href="vehicle-details.html">Nissan Micra</a></h4>
-                                                <div class="result-item-cont">
-                                                    <div class="result-item-block col1">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus. Donec facilisis fermentum sem, ac viverra ante luctus vel. Donec vel mauris quam..</p>
-                                                    </div>
-                                                    <div class="result-item-block col2">
-                                                        <div class="result-item-pricing">
-                                                            <div class="price">$28000</div>
-                                                        </div>
-                                                        <div class="result-item-action-buttons">
-                                                            <a href="#" class="btn btn-default btn-sm"><i class="fa fa-star-o"></i> Save</a>
-                                                            <a href="vehicle-details.html" class="btn btn-default btn-sm">Enquire</a><br>
-                                                            <a href="#" class="distance-calc"><i class="fa fa-map-marker"></i> Distance from me?</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="result-item-features">
-                                                    <ul class="inline">
-                                                        <li>4 door SUV</li>
-                                                        <li>6 cyl, 3.0 L Petrol</li>
-                                                        <li>6 speed Automatic</li>
-                                                        <li>4x4 Wheel Drive</li>
-                                                        <li>Listed by Individual</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <!-- Result Item -->
-                                        <div class="result-item format-standard">
-                                            <div class="result-item-image">
-                                                <a href="vehicle-details.html" class="media-box"><img src="http://placehold.it/600x400&amp;text=IMAGE+PLACEHOLDER" alt=""></a>
-                                                <span class="label label-default vehicle-age">2014</span>
-                                                <div class="result-item-view-buttons">
-                                                    <a href="https://www.youtube.com/watch?v=P5mvnA4BV7Y" data-rel="prettyPhoto"><i class="fa fa-play"></i> View video</a>
-                                                    <a href="vehicle-details.html"><i class="fa fa-plus"></i> View details</a>
-                                                </div>
-                                            </div>
-                                            <div class="result-item-in">
-                                                <h4 class="result-item-title"><a href="vehicle-details.html">Mazda 2 Sedan</a></h4>
-                                                <div class="result-item-cont">
-                                                    <div class="result-item-block col1">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus. Donec facilisis fermentum sem, ac viverra ante luctus vel. Donec vel mauris quam..</p>
-                                                    </div>
-                                                    <div class="result-item-block col2">
-                                                        <div class="result-item-pricing">
-                                                            <div class="price">$39000</div>
-                                                        </div>
-                                                        <div class="result-item-action-buttons">
-                                                            <a href="#" class="btn btn-default btn-sm"><i class="fa fa-star-o"></i> Save</a>
-                                                            <a href="vehicle-details.html" class="btn btn-default btn-sm">Enquire</a><br>
-                                                            <a href="#" class="distance-calc"><i class="fa fa-map-marker"></i> Distance from me?</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="result-item-features">
-                                                    <ul class="inline">
-                                                        <li>4 door Sedan</li>
-                                                        <li>6 cyl, 3.0 L Petrol</li>
-                                                        <li>6 speed Automatic</li>
-                                                        <li>4x4 Wheel Drive</li>
-                                                        <li>Listed by Dealer</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <!-- Result Item -->
-                                        <div class="result-item format-standard">
-                                            <div class="result-item-image">
-                                                <a href="vehicle-details.html" class="media-box"><img src="http://placehold.it/600x400&amp;text=IMAGE+PLACEHOLDER" alt=""></a>
-                                                <span class="label label-default vehicle-age">2012</span>
-                                                <div class="result-item-view-buttons">
-                                                    <a href="https://www.youtube.com/watch?v=P5mvnA4BV7Y" data-rel="prettyPhoto"><i class="fa fa-play"></i> View video</a>
-                                                    <a href="vehicle-details.html"><i class="fa fa-plus"></i> View details</a>
-                                                </div>
-                                            </div>
-                                            <div class="result-item-in">
-                                                <h4 class="result-item-title"><a href="vehicle-details.html">Mercedes Benz SL-300</a></h4>
-                                                <div class="result-item-cont">
-                                                    <div class="result-item-block col1">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus. Donec facilisis fermentum sem, ac viverra ante luctus vel. Donec vel mauris quam..</p>
-                                                    </div>
-                                                    <div class="result-item-block col2">
-                                                        <div class="result-item-pricing">
-                                                            <div class="price">$45000</div>
-                                                        </div>
-                                                        <div class="result-item-action-buttons">
-                                                            <a href="#" class="btn btn-default btn-sm"><i class="fa fa-star-o"></i> Save</a>
-                                                            <a href="vehicle-details.html" class="btn btn-default btn-sm">Enquire</a><br>
-                                                            <a href="#" class="distance-calc"><i class="fa fa-map-marker"></i> Distance from me?</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="result-item-features">
-                                                    <ul class="inline">
-                                                        <li>4 door Sedan</li>
-                                                        <li>6 cyl, 3.0 L Petrol</li>
-                                                        <li>6 speed Automatic</li>
-                                                        <li>4x4 Wheel Drive</li>
-                                                        <li>Listed by Individual</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                           	</div>
-                       	</section>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="sidebar-widget widget">
-                            <h3 class="widgettitle">Latest added</h3>
-                            <div class="carousel-wrapper">
-                                <div class="row">
-                                    <ul class="owl-carousel single-carousel" id="vehicle-slider" data-columns="1" data-autoplay="" data-pagination="no" data-arrows="no" data-single-item="no" data-items-desktop="1" data-items-desktop-small="1" data-items-tablet="2" data-items-mobile="1">
-                                        <li class="item">
-                                            <div class="vehicle-block format-standard">
-                                                <a href="vehicle-details.html" class="media-box"><img src="http://placehold.it/600x400&amp;text=IMAGE+PLACEHOLDER" alt=""></a>
-                                                <div class="vehicle-block-content">
-                                                    <h5 class="vehicle-title"><a href="vehicle-details.html">Nissan Terrano first hand</a></h5>
-                                                    <span class="vehicle-meta">Nissan, Brown beige, by <abbr class="user-type" title="Listed by an dealer">Dealer</abbr></span>
-                                                    <a href="results-list.html" title="View all SUVs" class="vehicle-body-type"><img src="images/body-types/suv.png" width="30" alt=""></a>
-                                                    <span class="vehicle-cost">$28000</span>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="item">
-                                            <div class="vehicle-block format-standard">
-                                                <a href="vehicle-details.html" class="media-box"><img src="http://placehold.it/600x400&amp;text=IMAGE+PLACEHOLDER" alt=""></a>
-                                                <div class="vehicle-block-content">
-                                                    <h5 class="vehicle-title"><a href="vehicle-details.html">Mercedes Benz E Class</a></h5>
-                                                    <span class="vehicle-meta">Mercedes, Silver Blue, by <abbr class="user-type" title="Listed by an individual">Individual</abbr></span>
-                                                    <a href="results-list.html" title="View all convertibles" class="vehicle-body-type"><img src="images/body-types/convertible.png" width="30" alt=""></a>
-                                                    <span class="vehicle-cost">$76000</span>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="item">
-                                            <div class="vehicle-block format-standard">
-                                                <a href="vehicle-details.html" class="media-box"><img src="http://placehold.it/600x400&amp;text=IMAGE+PLACEHOLDER" alt=""></a>
-                                                <div class="vehicle-block-content">
-                                                    <h5 class="vehicle-title"><a href="vehicle-details.html">Newly launched Nissan Sunny</a></h5>
-                                                    <span class="vehicle-meta">Nissan, Brown beige, by <abbr class="user-type" title="Listed by Autostars">Autostars</abbr></span>
-                                                    <a href="results-list.html" title="View all coupes" class="vehicle-body-type"><img src="images/body-types/coupe.png" width="30" alt=""></a>
-                                                    <span class="vehicle-cost">$31999</span>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        
-                        <div class="sidebar-widget widget">
-                            <h3 class="widgettitle">Recently Sold</h3>
-                            <div class="carousel-wrapper">
-                                <div class="row">
-                                    <ul class="owl-carousel single-carousel" id="vehicle-slider" data-columns="1" data-autoplay="" data-pagination="no" data-arrows="no" data-single-item="no" data-items-desktop="1" data-items-desktop-small="1" data-items-tablet="2" data-items-mobile="1">
-                                        <li class="item">
-                                            <div class="vehicle-block format-standard">
-                                                <a href="vehicle-details.html" class="media-box"><img src="http://placehold.it/600x400&amp;text=IMAGE+PLACEHOLDER" alt=""></a>
-                                                <div class="vehicle-block-content">
-                                                    <h5 class="vehicle-title"><a href="vehicle-details.html">Mercedes Benz E Class</a></h5>
-                                                    <span class="vehicle-meta">Mercedes, Silver Blue, by <abbr class="user-type" title="Listed by an individual">Individual</abbr></span>
-                                                    <a href="results-list.html" title="View all convertibles" class="vehicle-body-type"><img src="images/body-types/convertible.png" width="30" alt=""></a>
-                                                    <span class="vehicle-cost">$76000</span>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="item">
-                                            <div class="vehicle-block format-standard">
-                                                <a href="vehicle-details.html" class="media-box"><img src="http://placehold.it/600x400&amp;text=IMAGE+PLACEHOLDER" alt=""></a>
-                                                <div class="vehicle-block-content">
-                                                    <h5 class="vehicle-title"><a href="vehicle-details.html">Nissan Terrano first hand</a></h5>
-                                                    <span class="vehicle-meta">Nissan, Brown beige, by <abbr class="user-type" title="Listed by an dealer">Dealer</abbr></span>
-                                                    <a href="results-list.html" title="View all SUVs" class="vehicle-body-type"><img src="images/body-types/suv.png" width="30" alt=""></a>
-                                                    <span class="vehicle-cost">$28000</span>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="item">
-                                            <div class="vehicle-block format-standard">
-                                                <a href="vehicle-details.html" class="media-box"><img src="http://placehold.it/600x400&amp;text=IMAGE+PLACEHOLDER" alt=""></a>
-                                                <div class="vehicle-block-content">
-                                                    <h5 class="vehicle-title"><a href="vehicle-details.html">Newly launched Nissan Sunny</a></h5>
-                                                    <span class="vehicle-meta">Nissan, Brown beige, by <abbr class="user-type" title="Listed by Autostars">Autostars</abbr></span>
-                                                    <a href="results-list.html" title="View all coupes" class="vehicle-body-type"><img src="images/body-types/coupe.png" width="30" alt=""></a>
-                                                    <span class="vehicle-cost">$31999</span>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                   	</div>
-               	</div>
-           	</div>
-            <div class="spacer-50"></div>
-            <div class="lgray-bg padding-tb45">
-            	<div class="container">
-                    <div class="text-align-center">
-                        <h2>Find a plan that’s right for you.</h2>
-                    </div>
-                    <div class="spacer-10"></div>
-                    <div class="pricing-table three-cols margin-0">
-                        <div class="pricing-column">
-                            <h3>Basic</h3>
-                            <div class="pricing-column-content">
-                                <h4> <span class="dollar-sign">$</span> 50 </h4>
-                                <span class="interval">Until Sold</span>
-                                <ul class="features">
-                                    <li>This is included</li>
-                                    <li>You even get this <a href="#" data-toggle="popover" data-trigger="focus" data-placement="right" data-content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus."><i class="fa fa-info-circle"></i></a></li>
-                                    <li>Yes, this too! <a href="#" data-toggle="popover" data-trigger="focus" data-placement="right" data-content="<i class='fa fa-binoculars fa-3x text-warning'></i><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus."><i class="fa fa-info-circle"></i></a></li>
-                                </ul>
-                                <a class="btn btn-primary" href="add-listing-form.html">Create Ad Now</a>
-                            </div>
-                        </div>
-                        <div class="pricing-column highlight accent-color">
-                            <h3>Standard<span class="highlight-reason">Most Popular</span></h3>
-                            <div class="pricing-column-content">
-                                <h4> <span class="dollar-sign">$</span> 99 </h4>
-                                <span class="interval">Until Sold</span>
-                                <ul class="features">
-                                    <li>This is included <a href="#" data-toggle="popover" data-trigger="focus" data-placement="right" data-content="<i class='fa fa-cc-visa fa-3x text-info'></i><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus."><i class="fa fa-info-circle"></i></a></li>
-                                    <li>And this too</li>
-                                    <li>Maybe even this</li>
-                                    <li>Nevermind, it&#8217;s not</li>
-                                </ul>
-                                <a class="btn btn-info" href="add-listing-form.html">Create Ad Now</a>
-                            </div>
-                        </div>
-                        <div class="pricing-column">
-                            <h3>Advanced</h3>
-                            <div class="pricing-column-content">
-                                <h4> <span class="dollar-sign">$</span> 149 </h4>
-                                <span class="interval">Until Sold</span>
-                                <ul class="features">
-                                    <li>This is included</li>
-                                    <li>Even this too</li>
-                                    <li>Also included</li>
-                                    <li>You even get this</li>
-                                </ul>
-                                <a class="btn btn-primary" href="add-listing-form.html">Create Ad Now</a>
-                            </div>
-                        </div>
-                    </div>
-           			<div class="spacer-30"></div>
-                </div>
-          	</div>
-            <div class="dark-bg parallax parallax1" style="background-image:url(http://placehold.it/1400x500&amp;text=IMAGE+PLACEHOLDER);">
-                <div class="overlay-transparent padding-tb125">
-                    <div class="container">
-                    	<h1 class="uppercase">List your car for selling</h1>
-                        <a href="add-listing-form.html" class="btn btn-info btn-lg">Submit Ad Listing</a>
-                    </div>
-              	</div>
-          	</div>
-        </div>
-   	</div>
-    <!-- End Body Content -->
-    <!-- Start site footer -->
-    <footer class="site-footer">
-       	<div class="site-footer-top">
-       		<div class="container">
-                <div class="row">
-                	<div class="col-md-3 col-sm-6 footer_widget widget widget_newsletter">
-                    	<h4 class="widgettitle">Sign up for our newsletter</h4>
-                        <form>
-                        	<input type="text" class="form-control" placeholder="Name">
-                        	<input type="email" class="form-control" placeholder="Email">
-                        	<input type="submit" class="btn btn-primary btn-lg" value="Sign up now">
-                        </form>
-                    </div>
-                	<div class="col-md-2 col-sm-6 footer_widget widget widget_custom_menu widget_links">
-                    	<h4 class="widgettitle">Blogroll</h4>
-                        <ul>
-                        	<li><a href="blog.html">Car News</a></li>
-                        	<li><a href="blog-masonry.html">Car Reviews</a></li>
-                        	<li><a href="about.html">Car Insurance</a></li>
-                        	<li><a href="about-html">Bodyshop</a></li>
-                        </ul>
-                    </div>
-                	<div class="col-md-2 col-sm-6 footer_widget widget widget_custom_menu widget_links">
-                    	<h4 class="widgettitle">Help &amp; Support</h4>
-                        <ul>
-                        	<li><a href="results-list.html">Buying a car</a></li>
-                        	<li><a href="joinus.html">Selling a car</a></li>
-                        	<li><a href="about.html">Online safety</a></li>
-                        	<li><a href="contact.html">Contact us</a></li>
-                        </ul>
-                    </div>
-                	<div class="col-md-5 col-sm-6 footer_widget widget text_widget">
-                    	<h4 class="widgettitle">About AutoStars</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus. Donec facilisis fermentum sem, ac viverra ante luctus vel. Donec vel mauris quam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus.</p>
-                    </div>
-                </div>
-            </div>
-     	</div>
-        <div class="site-footer-bottom">
-        	<div class="container">
-                <div class="row">
-                	<div class="col-md-6 col-sm-6 copyrights-left">
-                    	<p>&copy; 2014 AutoStars. All Rights Reserved</p>
-                    </div>
-                    <div class="col-md-6 col-sm-6 copyrights-right">
-                        <ul class="social-icons social-icons-colored pull-right">
-                            <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                            <li class="youtube"><a href="#"><i class="fa fa-youtube"></i></a></li>
-                            <li class="flickr"><a href="#"><i class="fa fa-flickr"></i></a></li>
-                            <li class="vimeo"><a href="#"><i class="fa fa-vimeo-square"></i></a></li>
-                            <li class="digg"><a href="#"><i class="fa fa-digg"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- End site footer -->
-  	<a id="back-to-top"><i class="fa fa-angle-double-up"></i></a>  
-</div>
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog"  aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4>Login to your account</h4>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                        <input type="text" class="form-control" placeholder="Username">
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                        <input type="password" class="form-control" placeholder="Password">
-                    </div>
-                    <input type="submit" class="btn btn-primary" value="Login">
-                </form>
-           	</div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-block btn-facebook btn-social"><i class="fa fa-facebook"></i> Login with Facebook</button>
-                <button type="button" class="btn btn-block btn-twitter btn-social"><i class="fa fa-twitter"></i> Login with Twitter</button>
-            </div>
-        </div>
-    </div>
-</div>
-<script src="js/jquery-2.0.0.min.js"></script> <!-- Jquery Library Call -->
-<script src="vendor/prettyphoto/js/prettyphoto.js"></script> <!-- PrettyPhoto Plugin -->
-<script src="js/ui-plugins.js"></script> <!-- UI Plugins -->
-<script src="js/helper-plugins.js"></script> <!-- Helper Plugins -->
-<script src="vendor/owl-carousel/js/owl.carousel.min.js"></script> <!-- Owl Carousel -->
-<script src="vendor/password-checker.js"></script> <!-- Password Checker -->
-<script src="js/bootstrap.js"></script> <!-- UI -->
-<script src="js/waypoints.js"></script> <!-- Waypoints --> 
-<script src="js/init.js"></script> <!-- All Scripts -->
-<script src="vendor/flexslider/js/jquery.flexslider.js"></script> <!-- FlexSlider -->
-<script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-</body>
-</html>
