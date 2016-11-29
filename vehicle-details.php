@@ -11,6 +11,11 @@
     }
 	else
     $req = '';
+
+    if(isset($_GET['comments'])){
+        $req = "INSERT INTO commentaires('name', 'mail', 'phone', 'location', 'comment') VALUES"
+    }
+
     if(isset($_GET['vehicule'])){
         $req = "SELECT * FROM select_one_car WHERE immatriculation = '".$_GET['vehicule']."' LIMIT 0,1";
     }else{
